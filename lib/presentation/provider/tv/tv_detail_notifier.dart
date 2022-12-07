@@ -26,27 +26,21 @@ class TvDetailNotifier extends ChangeNotifier {
       required this.saveWatchlistTv});
 
   late TvDetail _tv;
-
   TvDetail get tv => _tv;
 
   RequestState _tvState = RequestState.Empty;
-
   RequestState get tvState => _tvState;
 
   List<Tv> _tvRecommendations = [];
-
   List<Tv> get tvRecommendations => _tvRecommendations;
 
   RequestState _recommendationState = RequestState.Empty;
-
   RequestState get recommendationState => _recommendationState;
 
   String _message = '';
-
   String get message => _message;
 
   bool _isAddedtoWatchlist = false;
-
   bool get isAddedToWatchlist => _isAddedtoWatchlist;
 
   Future<void> fetchTvDetail(int id) async {
