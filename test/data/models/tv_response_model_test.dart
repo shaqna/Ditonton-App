@@ -8,18 +8,18 @@ import '../../json_reader.dart';
 
 void main() {
   final tTvModel = TvModel(
-    backdropPath: 'backdropPath',
-    genreIds: [1, 2, 3],
-    id: 1,
-    name: 'name',
-    originCountry: ['1', '2'],
-    originalLanguage: 'originalLanguage',
-    originalName: 'originalName',
-    overview: 'overview',
-    popularity: 1.0,
-    posterPath: 'posterPath',
-    voteAverage: 1,
-    voteCount: 1,
+      id: 11250,
+      name: "Hidden Passion",
+      overview: "The Reyes-Elizondo's idyllic lives are shattered by a murder charge against Eric and León.",
+      originCountry: ["CO"],
+      genreIds: [18],
+      originalLanguage: 'es',
+      originalName: 'Pasión de gavilanes',
+      popularity: 3224.751,
+      voteAverage: 7.6,
+      voteCount: 1805,
+      posterPath: "/lWlsZIsrGVWHtBeoOeLxIKDd9uy.jpg",
+      backdropPath: "/4g5gK5eGWZg8swIZl6eX2AoJp8S.jpg"
   );
   final tTvResponseModel =
   TvResponse(tvList: <TvModel>[tTvModel]);
@@ -27,7 +27,7 @@ void main() {
     test('should return a valid model from JSON', () async {
       // arrange
       final Map<String, dynamic> jsonMap =
-      json.decode(readJson('dummy_data/now_playing.json'));
+      json.decode(readJson('dummy_data/tv_now_playing.json'));
       // act
       final result = TvResponse.fromJson(jsonMap);
       // assert
@@ -45,19 +45,22 @@ void main() {
       final expectedJsonMap = {
         "results": [
           {
-            "adult": false,
-            "backdrop_path": "/path.jpg",
-            "genre_ids": [1, 2, 3, 4],
-            "id": 1,
-            "original_title": "Original Title",
-            "overview": "Overview",
-            "popularity": 1.0,
-            "poster_path": "/path.jpg",
-            "release_date": "2020-05-05",
-            "title": "Title",
-            "video": false,
-            "vote_average": 1.0,
-            "vote_count": 1
+            "backdrop_path": "/4g5gK5eGWZg8swIZl6eX2AoJp8S.jpg",
+            "genre_ids": [
+              18
+            ],
+            "id": 11250,
+            "name": "Hidden Passion",
+            "origin_country": [
+              "CO"
+            ],
+            "original_language": "es",
+            "original_name": "Pasión de gavilanes",
+            "overview": "The Reyes-Elizondo's idyllic lives are shattered by a murder charge against Eric and León.",
+            "popularity": 3224.751,
+            "poster_path": "/lWlsZIsrGVWHtBeoOeLxIKDd9uy.jpg",
+            "vote_average": 7.6,
+            "vote_count": 1805
           }
         ],
       };
