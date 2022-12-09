@@ -21,7 +21,7 @@ void main() {
   final tId = 1;
   final tTv = <Tv>[];
 
-  test('should get list of movie recommendations from the repository',
+  test('should get list of tv recommendations from the repository',
       () async {
     // arrange
     when(mockMovieRepository.getRecommendationsTv(tId))
