@@ -88,7 +88,7 @@ class _HomeTvPageState extends State<HomeTvPage> with RouteAware {
                   }
                 }),
                 _buildSubHeading(
-                    title: 'On The Air',
+                    title: 'TV Now Playing',
                     onTap: () {
                       Navigator.pushNamed(context, OnTheAirTvPage.ROUTE_NAME);
                     }
