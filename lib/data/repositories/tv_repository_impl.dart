@@ -132,10 +132,10 @@ class TvRepositoryImpl implements TvRepository {
     try {
       final result = await remoteDataSource.getTvRecommendations(id);
       return Right(result.map((e) => e.toEntity()).toList());
-    } on ServerFailure {
+    } on ServerException {
       return Left(ServerFailure(''));
     } on SocketException {
-      return Left(ConnectionFailure('Failed connect to network'));
+      return Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
 }
