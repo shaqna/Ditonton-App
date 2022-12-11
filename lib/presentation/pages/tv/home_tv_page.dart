@@ -71,22 +71,22 @@ class _HomeTvPageState extends State<HomeTvPage> with RouteAware {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Airing Today',
-                  style: kHeading6,
-                ),
-                Consumer<TvListNotifier>(builder: (context, data, child) {
-                  final state = data.tvAiringTodayState;
-                  if (state == RequestState.Loading) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (state == RequestState.Loaded) {
-                    return TvList(data.tvAiringToday);
-                  } else {
-                    return Text('Failed');
-                  }
-                }),
+                // Text(
+                //   'Airing Today',
+                //   style: kHeading6,
+                // ),
+                // Consumer<TvListNotifier>(builder: (context, data, child) {
+                //   final state = data.tvAiringTodayState;
+                //   if (state == RequestState.Loading) {
+                //     return Center(
+                //       child: CircularProgressIndicator(),
+                //     );
+                //   } else if (state == RequestState.Loaded) {
+                //     return TvList(data.tvAiringToday);
+                //   } else {
+                //     return Text('Failed');
+                //   }
+                // }),
                 _buildSubHeading(
                     title: 'TV Now Playing',
                     onTap: () {
