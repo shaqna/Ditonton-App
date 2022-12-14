@@ -6,6 +6,7 @@ import 'package:ditonton/data/datasources/remote/movie/movie_remote_data_source.
 import 'package:ditonton/data/datasources/remote/tv/tv_remote_data_source.dart';
 import 'package:ditonton/domain/repositories/movie_repository.dart';
 import 'package:ditonton/domain/repositories/tv_repository.dart';
+import 'package:ditonton/utils/ssl_client.dart';
 import 'package:mockito/annotations.dart';
 import 'package:http/http.dart' as http;
 
@@ -19,6 +20,7 @@ import 'package:http/http.dart' as http;
   DatabaseHelper,
   DatabaseTvHelper,
 ], customMocks: [
-  MockSpec<http.Client>(as: #MockHttpClient)
+  MockSpec<http.Client>(as: #MockHttpClient),
+  MockSpec<SSLClient>(as: #MockSSLClient),
 ])
 void main() {}
