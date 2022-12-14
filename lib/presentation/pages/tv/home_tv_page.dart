@@ -5,8 +5,12 @@ import 'package:ditonton/presentation/pages/tv/on_the_air_tv_page.dart';
 import 'package:ditonton/presentation/pages/tv/popular_tv_page.dart';
 import 'package:ditonton/presentation/pages/tv/search_tv_page.dart';
 import 'package:ditonton/presentation/pages/tv/top_rated_tv_page.dart';
-import 'package:ditonton/presentation/provider/tv/tv_list_notifier.dart';
+import 'package:ditonton/presentation/provider/bloc/tv/%20now_playing/now_playing_tv_bloc.dart';
+import 'package:ditonton/presentation/provider/bloc/tv/popular/popular_tv_bloc.dart';
+import 'package:ditonton/presentation/provider/bloc/tv/top_rated/top_rated_tv_bloc.dart';
+import 'package:ditonton/presentation/provider/notifier/tv/tv_list_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import '../../../common/constants.dart';
@@ -26,12 +30,11 @@ class _HomeTvPageState extends State<HomeTvPage> with RouteAware {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-    Provider.of<TvListNotifier>(context, listen: false)
-      ..fetchTvTopRated()
-      ..fetchTvAiringToday()
-      ..fetchTvOnTheAir()
-      ..fetchTvPopular()
+    Future.microtask(() {
+      context.read<NowPlayingTvBloc>().add(OnFetchOnTheAirTv());
+      context.read<PopularTvBloc>().add(OnFetchPopularTv());
+      context.read<TopRatedTvBloc>().add(OnFetchTopRatedTv());
+    }
     );
   }
 
@@ -42,11 +45,9 @@ class _HomeTvPageState extends State<HomeTvPage> with RouteAware {
   }
 
   void didPopNext() {
-    Provider.of<TvListNotifier>(context, listen: false)
-      ..fetchTvTopRated()
-      ..fetchTvAiringToday()
-      ..fetchTvOnTheAir()
-      ..fetchTvPopular();
+    context.read<NowPlayingTvBloc>().add(OnFetchOnTheAirTv());
+    context.read<PopularTvBloc>().add(OnFetchPopularTv());
+    context.read<TopRatedTvBloc>().add(OnFetchTopRatedTv());
   }
 
   @override
@@ -71,36 +72,19 @@ class _HomeTvPageState extends State<HomeTvPage> with RouteAware {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Text(
-                //   'Airing Today',
-                //   style: kHeading6,
-                // ),
-                // Consumer<TvListNotifier>(builder: (context, data, child) {
-                //   final state = data.tvAiringTodayState;
-                //   if (state == RequestState.Loading) {
-                //     return Center(
-                //       child: CircularProgressIndicator(),
-                //     );
-                //   } else if (state == RequestState.Loaded) {
-                //     return TvList(data.tvAiringToday);
-                //   } else {
-                //     return Text('Failed');
-                //   }
-                // }),
                 _buildSubHeading(
                     title: 'TV Now Playing',
                     onTap: () {
                       Navigator.pushNamed(context, OnTheAirTvPage.ROUTE_NAME);
                     }
                 ),
-                Consumer<TvListNotifier>(builder: (context, data, child) {
-                  final state = data.tvOnTheAirState;
-                  if (state == RequestState.Loading) {
+                BlocBuilder<NowPlayingTvBloc, NowPlayingTvState>(builder: (context, state) {
+                  if (state is NowPlayingTvLoading) {
                     return Center(
                       child: CircularProgressIndicator(),
                     );
-                  } else if (state == RequestState.Loaded) {
-                    return TvList(data.tvOnTheAir);
+                  } else if (state is NowPlayingTvHasData) {
+                    return TvList(state.list);
                   } else {
                     return Text('Failed');
                   }
@@ -111,14 +95,14 @@ class _HomeTvPageState extends State<HomeTvPage> with RouteAware {
                       Navigator.pushNamed(context, TopRatedTvPage.ROUTE_NAME);
                     }
                 ),
-                Consumer<TvListNotifier>(builder: (context, data, child) {
-                  final state = data.topRatedTvState;
-                  if (state == RequestState.Loading) {
+                BlocBuilder<TopRatedTvBloc, TopRatedTvState>(builder: (context, state) {
+
+                  if (state is TopRatedTvLoading) {
                     return Center(
                       child: CircularProgressIndicator(),
                     );
-                  } else if (state == RequestState.Loaded) {
-                    return TvList(data.topRatedTv);
+                  } else if (state is TopRatedTvHasData) {
+                    return TvList(state.list);
                   } else {
                     return Text('Failed');
                   }
@@ -129,14 +113,14 @@ class _HomeTvPageState extends State<HomeTvPage> with RouteAware {
                       Navigator.pushNamed(context, PopularTvPage.ROUTE_NAME);
                     }
                 ),
-                Consumer<TvListNotifier>(builder: (context, data, child) {
-                  final state = data.popularTvState;
-                  if (state == RequestState.Loading) {
+                BlocBuilder<PopularTvBloc, PopularTvState>(builder: (context,state) {
+
+                  if (state is PopularTvLoading) {
                     return Center(
                       child: CircularProgressIndicator(),
                     );
-                  } else if (state == RequestState.Loaded) {
-                    return TvList(data.popularTv);
+                  } else if (state is PopularTvHasData) {
+                    return TvList(state.list);
                   } else {
                     return Text('Failed');
                   }

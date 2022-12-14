@@ -1,7 +1,9 @@
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/tv/on_the_air_tv_notifier.dart';
+import 'package:ditonton/presentation/provider/bloc/tv/%20now_playing/now_playing_tv_bloc.dart';
+import 'package:ditonton/presentation/provider/notifier/tv/on_the_air_tv_notifier.dart';
 import 'package:ditonton/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class OnTheAirTvPage extends StatefulWidget {
@@ -16,8 +18,8 @@ class _OnTheAirTvPageState extends State<OnTheAirTvPage> {
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<OnTheAirTvNotifier>(context, listen: false)
-            .fetchOnTheAirTv());
+        BlocProvider.of<NowPlayingTvBloc>(context)
+            .add(OnFetchOnTheAirTv()));
   }
 
   @override
@@ -28,24 +30,24 @@ class _OnTheAirTvPageState extends State<OnTheAirTvPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<OnTheAirTvNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
+        child: BlocBuilder<NowPlayingTvBloc, NowPlayingTvState>(
+          builder: (context, state) {
+            if (state is NowPlayingTvLoading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.state == RequestState.Loaded) {
+            } else if (state is NowPlayingTvHasData) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final tv = data.tvs[index];
+                  final tv = state.list[index];
                   return TvCard(tv);
                 },
-                itemCount: data.tvs.length,
+                itemCount: state.list.length,
               );
             } else {
               return Center(
                 key: Key('error_message'),
-                child: Text(data.message),
+                child: Text('Failed'),
               );
             }
           },

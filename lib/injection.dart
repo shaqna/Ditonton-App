@@ -25,26 +25,43 @@ import 'package:ditonton/domain/usecases/tv/get_tv_top_rated.dart';
 import 'package:ditonton/domain/usecases/tv/get_tv_on_the_air.dart';
 import 'package:ditonton/domain/usecases/tv/get_watchlist_tv.dart';
 import 'package:ditonton/domain/usecases/tv/search_tv.dart';
-import 'package:ditonton/presentation/provider/movie/movie_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/movie/movie_list_notifier.dart';
-import 'package:ditonton/presentation/provider/movie/movie_search_notifier.dart';
-import 'package:ditonton/presentation/provider/movie/popular_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/movie/top_rated_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/movie/watchlist_movie_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/popular_tv_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/tv_detail_notifier.dart';
+import 'package:ditonton/presentation/provider/bloc/movie/detail/detail_movie_bloc.dart';
+import 'package:ditonton/presentation/provider/bloc/movie/now_playing/now_playing_movie_bloc.dart';
+import 'package:ditonton/presentation/provider/bloc/movie/popular/popular_movie_bloc.dart';
+import 'package:ditonton/presentation/provider/bloc/movie/recommendations/recommendation_movie_bloc.dart';
+import 'package:ditonton/presentation/provider/bloc/movie/search/search_bloc.dart';
+import 'package:ditonton/presentation/provider/bloc/movie/top_rated/top_rated_movie_bloc.dart';
+import 'package:ditonton/presentation/provider/bloc/movie/watchlist/watchlist_movie_bloc.dart';
+import 'package:ditonton/presentation/provider/bloc/movie/watchlist_status/watchlist_movie_status_bloc.dart';
+import 'package:ditonton/presentation/provider/bloc/tv/%20now_playing/now_playing_tv_bloc.dart';
+import 'package:ditonton/presentation/provider/bloc/tv/detail/detail_tv_bloc.dart';
+import 'package:ditonton/presentation/provider/bloc/tv/popular/popular_tv_bloc.dart';
+import 'package:ditonton/presentation/provider/bloc/tv/recommendation/tv_recommendation_bloc.dart';
+import 'package:ditonton/presentation/provider/bloc/tv/search/search_tv_bloc.dart';
+import 'package:ditonton/presentation/provider/bloc/tv/top_rated/top_rated_tv_bloc.dart';
+import 'package:ditonton/presentation/provider/bloc/tv/watchlist/watchlist_tv_bloc.dart';
+import 'package:ditonton/presentation/provider/bloc/tv/watchlist_status/watchlist_tv_status_bloc.dart';
+import 'package:ditonton/presentation/provider/notifier/movie/movie_detail_notifier.dart';
+import 'package:ditonton/presentation/provider/notifier/movie/movie_list_notifier.dart';
+import 'package:ditonton/presentation/provider/notifier/movie/movie_search_notifier.dart';
+import 'package:ditonton/presentation/provider/notifier/movie/popular_movies_notifier.dart';
+import 'package:ditonton/presentation/provider/notifier/movie/top_rated_movies_notifier.dart';
+import 'package:ditonton/presentation/provider/notifier/movie/watchlist_movie_notifier.dart';
+import 'package:ditonton/presentation/provider/notifier/tv/popular_tv_notifier.dart';
+import 'package:ditonton/presentation/provider/notifier/tv/tv_detail_notifier.dart';
+import 'package:ditonton/utils/ssl_client.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
-import 'package:ditonton/presentation/provider/tv/tv_list_notifier.dart';
+import 'package:ditonton/presentation/provider/notifier/tv/tv_list_notifier.dart';
 import 'package:ditonton/domain/usecases/tv/get_recomendations_tv.dart';
 import 'package:ditonton/domain/usecases/tv/save_watchlist_tv.dart';
 import 'package:ditonton/domain/usecases/tv/remove_watchlist_tv.dart';
 import 'package:ditonton/domain/usecases/tv/get_watch_list_tv_status.dart';
 
-import 'presentation/provider/tv/on_the_air_tv_notifier.dart';
-import 'presentation/provider/tv/search_tv_notifier.dart';
-import 'presentation/provider/tv/top_rated_tv_notifier.dart';
-import 'presentation/provider/tv/watchlist_tv_notifier.dart';
+import 'presentation/provider/notifier/tv/on_the_air_tv_notifier.dart';
+import 'presentation/provider/notifier/tv/search_tv_notifier.dart';
+import 'presentation/provider/notifier/tv/top_rated_tv_notifier.dart';
+import 'presentation/provider/notifier/tv/watchlist_tv_notifier.dart';
 
 final locator = GetIt.instance;
 
@@ -84,6 +101,67 @@ void init() {
   locator.registerFactory(
     () => WatchlistMovieNotifier(
       getWatchlistMovies: locator(),
+    ),
+  );
+
+  // bloc movie
+  locator.registerFactory(
+      () => SearchBloc(locator()),
+  );
+  locator.registerFactory(
+      () => DetailMovieBloc(locator()),
+  );
+  locator.registerFactory(
+      () => NowPlayingMovieBloc(locator()),
+  );
+  locator.registerFactory(
+      () => PopularMovieBloc(locator()),
+  );
+  locator.registerFactory(
+      () => RecommendationMovieBloc(locator()),
+  );
+  locator.registerFactory(
+      () => TopRatedMovieBloc(locator())
+  );
+  locator.registerFactory(
+      () => WatchlistMovieBloc(locator())
+  );
+  locator.registerFactory(
+      () => WatchlistMovieStatusBloc(
+        locator(),
+        locator(),
+        locator()
+      ),
+  );
+
+  // bloc tv
+  locator.registerFactory(
+        () => SearchTvBloc(locator()),
+  );
+  locator.registerFactory(
+        () => DetailTvBloc(locator()),
+  );
+  locator.registerFactory(
+        () => NowPlayingTvBloc(locator()),
+  );
+
+  locator.registerFactory(
+        () => PopularTvBloc(locator()),
+  );
+  locator.registerFactory(
+        () => TvRecommendationBloc(locator()),
+  );
+  locator.registerFactory(
+          () => TopRatedTvBloc(locator())
+  );
+  locator.registerFactory(
+          () => WatchlistTvBloc(locator())
+  );
+  locator.registerFactory(
+        () => WatchlistTvStatusBloc(
+        locator(),
+        locator(),
+        locator()
     ),
   );
 
@@ -174,6 +252,7 @@ void init() {
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
   locator.registerLazySingleton<DatabaseTvHelper>(() => DatabaseTvHelper());
 
-  // external
+  // utils
   locator.registerLazySingleton(() => http.Client());
+  locator.registerLazySingleton<SSLClient>(() => SSLClient());
 }
