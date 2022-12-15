@@ -19,12 +19,12 @@ class WatchlistTvStatusBloc
 
   WatchlistTvStatusBloc(this._getWatchListStatusTv, this._removeWatchlistTv,
       this._saveWatchlistTv)
-      : super(WatchlistTvStatusLoading()) {
+      : super(WatchlistTvStatusEmpty()) {
     on<OnFetchWatchlistStatus>((event, emit) async {
       emit(WatchlistTvStatusLoading());
       final isAddedToWatchlist = await _getWatchListStatusTv.execute(event.id);
 
-      emit(WatchlistTvStatusHasData(isAdded: isAddedToWatchlist, message: 'message'));
+      emit(WatchlistTvStatusHasData(isAddedToWatchlist, 'message'));
     });
 
     on<OnAddedToWatchlist>((event, emit) async {
@@ -39,7 +39,7 @@ class WatchlistTvStatusBloc
         await _getWatchListStatusTv.execute(event.tv.id);
 
         emit(WatchlistTvStatusHasData(
-            isAdded: isAddedToWatchlist, message: successMessage));
+            isAddedToWatchlist, 'message'));
       });
     });
 
@@ -54,7 +54,7 @@ class WatchlistTvStatusBloc
         final isAddedToWatchlist =
         await _getWatchListStatusTv.execute(event.tv.id);
         emit(WatchlistTvStatusHasData(
-            isAdded: isAddedToWatchlist, message: successMessage));
+            isAddedToWatchlist, 'message'));
       });
     });
   }

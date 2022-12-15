@@ -23,7 +23,7 @@ class WatchlistTvStatusError extends WatchlistTvStatusState{
 class WatchlistTvStatusHasData extends WatchlistTvStatusState{
   bool isAdded;
   String message;
-  WatchlistTvStatusHasData({required this.isAdded, required this.message});
+  WatchlistTvStatusHasData(this.isAdded, this.message);
 
   @override
   List<Object> get props => [isAdded, message];
