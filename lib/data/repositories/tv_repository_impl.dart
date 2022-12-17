@@ -28,6 +28,8 @@ class TvRepositoryImpl implements TvRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed connect to network'));
+    } on TlsException catch (e) {
+      return Left(CertificateFailure('Certificated not valid\n${e.message}'));
     }
   }
 
@@ -40,6 +42,8 @@ class TvRepositoryImpl implements TvRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect the network'));
+    } on TlsException catch (e) {
+      return Left(CertificateFailure('Certificated not valid\n${e.message}'));
     }
   }
 
@@ -52,6 +56,8 @@ class TvRepositoryImpl implements TvRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect the network'));
+    } on TlsException catch (e) {
+      return Left(CertificateFailure('Certificated not valid\n${e.message}'));
     }
   }
 
@@ -64,6 +70,8 @@ class TvRepositoryImpl implements TvRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect the network'));
+    } on TlsException catch (e) {
+      return Left(CertificateFailure('Certificated not valid\n${e.message}'));
     }
   }
 
@@ -76,6 +84,8 @@ class TvRepositoryImpl implements TvRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect the network'));
+    }on TlsException catch (e) {
+      return Left(CertificateFailure('Certificated not valid\n${e.message}'));
     }
   }
 
@@ -124,6 +134,8 @@ class TvRepositoryImpl implements TvRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect the network'));
+    } on TlsException catch (e) {
+      return Left(CertificateFailure('Certificated not valid\n${e.message}'));
     }
   }
 
@@ -136,6 +148,8 @@ class TvRepositoryImpl implements TvRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(CertificateFailure('Certificated not valid\n${e.message}'));
     }
   }
 }
