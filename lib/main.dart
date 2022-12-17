@@ -1,6 +1,5 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/utils.dart';
-import 'package:ditonton/firebase_options.dart';
 import 'package:ditonton/injection.dart' as di;
 import 'package:ditonton/presentation/pages/about/about_page.dart';
 import 'package:ditonton/presentation/pages/movie/home_movie_page.dart';
@@ -30,12 +29,14 @@ import 'package:ditonton/presentation/provider/bloc/tv/search/search_tv_bloc.dar
 import 'package:ditonton/presentation/provider/bloc/tv/top_rated/top_rated_tv_bloc.dart';
 import 'package:ditonton/presentation/provider/bloc/tv/watchlist/watchlist_tv_bloc.dart';
 import 'package:ditonton/presentation/provider/bloc/tv/watchlist_status/watchlist_tv_status_bloc.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
+import 'firebase_options.dart';
 import 'presentation/pages/tv/search_tv_page.dart';
 import 'presentation/pages/tv/tv_detail_page.dart';
 
@@ -43,6 +44,19 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseAnalytics.instance
+      .logBeginCheckout(
+      value: 10.0,
+      currency: 'USD',
+      items: [
+        AnalyticsEventItem(
+            itemName: 'Socks',
+            itemId: 'xjw73ndnw',
+            price: 10.0
+        ),
+      ],
+      coupon: '10PERCENTOFF'
   );
   di.init();
   runApp(MyApp());

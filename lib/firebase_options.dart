@@ -47,30 +47,30 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDUstbM0JOQ3a7YFWLxfE68g9mAzfPLDpI',
-    appId: '1:356717734416:web:0609af06e5baf24d3db895',
-    messagingSenderId: '356717734416',
-    projectId: 'ditonton-app-4a95b',
-    authDomain: 'ditonton-app-4a95b.firebaseapp.com',
-    storageBucket: 'ditonton-app-4a95b.appspot.com',
-    measurementId: 'G-5HR6PQN2SH',
+    apiKey: 'AIzaSyDWxPTZxAgdA1uWGmDAhDh7SNyc1whDezk',
+    appId: '1:589094164935:web:2229520c7a524c6d2d61e2',
+    messagingSenderId: '589094164935',
+    projectId: 'ditonton-app-a60fd',
+    authDomain: 'ditonton-app-a60fd.firebaseapp.com',
+    storageBucket: 'ditonton-app-a60fd.appspot.com',
+    measurementId: 'G-4LHGZB9L6G',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDBE0782gI3TNs_0Xdq5XrBKPPPyTDyq5Q',
-    appId: '1:356717734416:android:6fec8d397f6b2b0a3db895',
-    messagingSenderId: '356717734416',
-    projectId: 'ditonton-app-4a95b',
-    storageBucket: 'ditonton-app-4a95b.appspot.com',
+    apiKey: 'AIzaSyAOm0dv3m4qEcQvozTXFirE4sHHwVg8Rbk',
+    appId: '1:589094164935:android:5d5b0b2576476ea52d61e2',
+    messagingSenderId: '589094164935',
+    projectId: 'ditonton-app-a60fd',
+    storageBucket: 'ditonton-app-a60fd.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDCAgdTy_ubjUmCt_VvNl5hpMF8axOeCL8',
-    appId: '1:356717734416:ios:dc66178b8bbcf10a3db895',
-    messagingSenderId: '356717734416',
-    projectId: 'ditonton-app-4a95b',
-    storageBucket: 'ditonton-app-4a95b.appspot.com',
-    iosClientId: '356717734416-ndebvqntti97ltmmkj7vl9a0mtou7tsc.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCUFn8-x1Gn-O1FoETjdwDGr6u57ijxGYE',
+    appId: '1:589094164935:ios:8a3d880859bbb09b2d61e2',
+    messagingSenderId: '589094164935',
+    projectId: 'ditonton-app-a60fd',
+    storageBucket: 'ditonton-app-a60fd.appspot.com',
+    iosClientId: '589094164935-kal8b1fs3jhoistu6rn4kruirqf1o92o.apps.googleusercontent.com',
     iosBundleId: 'com.dicoding.ditonton',
   );
 }
