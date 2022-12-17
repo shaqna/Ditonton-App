@@ -8,10 +8,9 @@ import 'package:ditonton/presentation/pages/tv/top_rated_tv_page.dart';
 import 'package:ditonton/presentation/provider/bloc/tv/%20now_playing/now_playing_tv_bloc.dart';
 import 'package:ditonton/presentation/provider/bloc/tv/popular/popular_tv_bloc.dart';
 import 'package:ditonton/presentation/provider/bloc/tv/top_rated/top_rated_tv_bloc.dart';
-import 'package:ditonton/presentation/provider/notifier/tv/tv_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
+
 
 import '../../../common/constants.dart';
 

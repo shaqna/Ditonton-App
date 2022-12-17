@@ -1,10 +1,7 @@
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/presentation/provider/bloc/tv/%20now_playing/now_playing_tv_bloc.dart';
-import 'package:ditonton/presentation/provider/notifier/tv/on_the_air_tv_notifier.dart';
 import 'package:ditonton/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 class OnTheAirTvPage extends StatefulWidget {
   static const ROUTE_NAME = '/on-the-air-tv';

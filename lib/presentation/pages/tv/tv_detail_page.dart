@@ -8,7 +8,7 @@ import 'package:ditonton/presentation/provider/bloc/tv/watchlist_status/watchlis
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:provider/provider.dart';
+
 
 class TvDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/tv-detail';
